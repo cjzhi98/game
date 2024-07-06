@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .slideshow-container {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .slide {
+            text-align: center;
+        }
+        .slide h2 {
+            margin-bottom: 20px;
+        }
+        .categories {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .category {
+            padding: 5px 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slide">
+            <h2 id="title"></h2>
+            <div class="categories" id="categories"></div>
+            <p id="clickToReveal">点击选项来回答</p>
+        </div>
+        <div class="navigation">
+            <button id="prevButton">上一个</button>
+            <span id="slideNumber"></span>
+            <button id="nextButton">下一个</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            { title: "斯德哥尔摩综合征", categories: ["心理学", "法律", "经济"], correctCategory: "心理学" },
+            { title: "2333", categories: ["网络", "美食", "音乐"], correctCategory: "网络" },
+            { title: "费米悖论", categories: ["天文学", "政治", "哲学"], correctCategory: "天文学" },
+            { title: "Crispr", categories: ["生物学", "农业", "医学"], correctCategory: "生物学" },
+            { title: "塔纳赫", categories: ["宗教", "历史", "社会"], correctCategory: "宗教" },
+            { title: "雨伞效应", categories: ["经济学", "社会心理", "科技"], correctCategory: "经济学" },
+            { title: "望舒", categories: ["文学", "地理", "民俗"], correctCategory: "文学" },
+            { title: "曼德拉效应", categories: ["心理学", "社会文化", "科学"], correctCategory: "心理学" },
+            { title: "默克尔树", categories: ["电脑", "金融", "工程"], correctCategory: "电脑" },
+            { title: "雪国", categories: ["文学", "自然", "美术"], correctCategory: "文学" },
+            { title: "鬼笔", categories: ["植物", "生态", "设计"], correctCategory: "植物" },
+            { title: "12 angry men", categories: ["电影", "法律", "历史"], correctCategory: "电影" },
+            { title: "地上的苹果", categories: ["文学", "美学", "哲学"], correctCategory: "文学" },
+            { title: "法老之蛇", categories: ["化学", "宗教", "地质"], correctCategory: "化学" },
+            { title: "小豆洗", categories: ["民间传说", "神秘", "文化"], correctCategory: "民间传说" },
+            { title: "金唇", categories: ["技术", "隐私", "商业"], correctCategory: "技术" }
+        ];
+
+        let currentSlideIndex = 0;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function updateSlide() {
+            const slide = slides[currentSlideIndex];
+            document.getElementById('title').textContent = slide.title;
+            const categoriesContainer = document.getElementById('categories');
+            categoriesContainer.innerHTML = '';
+            
+            let shuffledCategories = [...slide.categories];
+            shuffleArray(shuffledCategories);
+
+            shuffledCategories.forEach(category => {
+                const categoryElement = document.createElement('span');
+                categoryElement.className = 'category';
+                categoryElement.textContent = category;
+                categoryElement.onclick = () => checkAnswer(category);
+                categoriesContainer.appendChild(categoryElement);
+            });
+            document.getElementById('slideNumber').textContent = `${currentSlideIndex + 1} / ${slides.length}`;
+        }
+
+        function checkAnswer(selectedCategory) {
+            const slide = slides[currentSlideIndex];
+            if (selectedCategory === slide.correctCategory) {
+                alert('正确！');
+            } else {
+                alert(`错误。正确答案是：${slide.correctCategory}`);
+            }
+        }
+
+        document.getElementById('prevButton').addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            updateSlide();
+        });
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            updateSlide();
+        });
+
+        // Initial slide update
+        updateSlide();
+    </script>
+</body>
+</html>
