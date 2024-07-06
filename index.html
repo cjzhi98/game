@@ -15,48 +15,69 @@
             background-color: #f0f0f0;
         }
         .slideshow-container {
-            width: 80%;
-            max-width: 600px;
+            width: 90%;
+            max-width: 800px;
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 30px;
         }
         .slide {
             text-align: center;
         }
         .slide h2 {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            font-size: 36px;
+            color: #333;
         }
         .categories {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .category {
-            padding: 5px 10px;
+            padding: 15px 25px;
             background-color: #e0e0e0;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
+            font-size: 24px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .category:hover {
+            background-color: #d0d0d0;
+            transform: scale(1.05);
         }
         .navigation {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 20px;
+            margin-top: 30px;
         }
         button {
             background-color: #4CAF50;
             border: none;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 20px;
             margin: 4px 2px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #slideNumber {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        #clickToReveal {
+            font-size: 20px;
+            color: #666;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -88,7 +109,6 @@
             { title: "雪国", categories: ["文学", "自然", "美术"], correctCategory: "文学" },
             { title: "鬼笔", categories: ["植物", "生态", "设计"], correctCategory: "植物" },
             { title: "12 angry men", categories: ["电影", "法律", "历史"], correctCategory: "电影" },
-            { title: "地上的苹果", categories: ["文学", "美学", "哲学"], correctCategory: "文学" },
             { title: "法老之蛇", categories: ["化学", "宗教", "地质"], correctCategory: "化学" },
             { title: "小豆洗", categories: ["民间传说", "神秘", "文化"], correctCategory: "民间传说" },
             { title: "金唇", categories: ["技术", "隐私", "商业"], correctCategory: "技术" }
